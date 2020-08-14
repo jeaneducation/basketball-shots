@@ -1,9 +1,8 @@
 import React from 'react';
-import {Grid, Input} from "semantic-ui-react";
+import {Grid, Input, InputOnChangeData} from "semantic-ui-react";
 import {Quarter, Team} from "./App";
 import QuarterView from "./QuarterView";
 import TotalView from "./TotalView";
-import {InputOnChangeData} from "semantic-ui-react";
 
 interface Props {
     index: number
