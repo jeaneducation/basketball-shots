@@ -158,8 +158,9 @@ export class App extends React.Component<Props, State> {
                                 options={dropdownOptions}
                                 onChange={handleDropdownChange}
                                 value={this.state.current_game_index}
+                                disabled={this.state.games.length < 1}
                             />
-                            <Button icon labelPosition="left" onClick={this.createNewGame}>
+                            <Button icon labelPosition="left" onClick={this.createNewGame} primary={true}>
                                 <Icon name="plus"/>
                                 New Game
                             </Button>

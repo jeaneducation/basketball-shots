@@ -52,13 +52,13 @@ export class QuarterView extends React.Component<Props> {
                         <Grid>
                             <Grid.Row style={{display: "inline"}}>
                                 <Input label="Shots" value={this.props.quarter.shots} readOnly/>
-                                <Button icon="chevron down" onClick={() => this.adjustShots(-1)}/>
-                                <Button icon="chevron up" onClick={() => this.adjustShots(1)}/>
+                                <Button icon="chevron down" color="yellow" onClick={() => this.adjustShots(-1)} disabled={this.props.quarter.shots <= 0}/>
+                                <Button icon="chevron up" color="green" onClick={() => this.adjustShots(1)}/>
                             </Grid.Row>
                             <Grid.Row style={{display: "inline"}}>
                                 <Input label="Contests" value={this.props.quarter.contests} readOnly/>
-                                <Button icon="chevron down" onClick={() => this.adjustContests(-1)}/>
-                                <Button icon="chevron up" onClick={() => this.adjustContests(1)}/>
+                                <Button icon="chevron down" color="yellow" onClick={() => this.adjustContests(-1)} disabled={this.props.quarter.contests <= 0}/>
+                                <Button icon="chevron up" color="green" onClick={() => this.adjustContests(1)}/>
                             </Grid.Row>
                             <Grid.Row style={{display: "inline"}}>
                                 <Input label="Running Total" value={this.calcRunningTotal()} readOnly/>
