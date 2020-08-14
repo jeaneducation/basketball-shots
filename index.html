@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<body>
+
+<!-- You MUST include jQuery before Fomantic -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.js"></script>
+
+<script>
+
+    jQuery(document).ready(function () {
+        var container = document.getElementById("quarter_container");
+        var template = document.getElementById("quarter");
+
+        for (var i = 1; i < 5; i += 1) {
+            var quarter = template.content.cloneNode(true);
+
+            var quarterName = quarter.querySelector(".quarter_header");
+            quarterName.innerHTML = "Quarter " + i;
+
+            container.appendChild(quarter);
+        }
+    })
+</script>
+
+<div id="quarter_container">
+
+</div>
+
+<div id="total_container">
+    <div class="ui card" style="width:100%;">
+        <div class="content">
+            <div class="header total_header">Game Total</div>
+            <div class="description">
+                <table class="ui definition table">
+                    <tbody>
+                    <tr>
+                        <td>Total Shots</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Total Contests</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Running Total</td>
+                        <td>200</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="quarter">
+    <div class="ui card" style="width:100%;">
+        <div class="content">
+
+            <div class="header quarter_header">
+<!--                Quarter #-->
+            </div>
+
+            <div class="description">
+                <div class="ui vertically divided grid">
+                    <div class="row">
+                        <div class="eight wide column">
+                            <div class="ui labeled input">
+                                <div class="ui label">
+                                    Shots
+                                </div>
+                                <input id="shot" type="number" value="0">
+                            </div>
+                            <button class="ui icon button">
+                                <i class="chevron down icon"></i>
+                            </button>
+                            <button class="ui icon button">
+                                <i class="chevron up icon"></i>
+                            </button>
+                        </div>
+                        <div class="eight wide column">
+                            <div class="ui labeled input">
+                                <div class="ui label">
+                                    Contests
+                                </div>
+                                <input id="contest" type="number" value="0">
+                            </div>
+                            <button class="ui icon button">
+                                <i class="chevron down icon"></i>
+                            </button>
+                            <button class="ui icon button">
+                                <i class="chevron up icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="ui definition table">
+                            <tbody>
+                            <tr>
+                                <td>Total Shots</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Total Contests</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>Running Total</td>
+                                <td>200</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+</body>
+</html>
