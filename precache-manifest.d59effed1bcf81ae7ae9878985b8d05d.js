@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "82713d5006a94c13447c885c18cec802",
+    "revision": "7928079a92b96774dad3f3c82965948f",
     "url": "/basketball-shots/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/basketball-shots/static/css/2.c43ad6bd.chunk.css"
   },
   {
-    "revision": "d93ac480df148c3b988a",
+    "revision": "8c75475d73c992d144ad",
     "url": "/basketball-shots/static/css/main.e070fe03.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/basketball-shots/static/js/2.80587d74.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d93ac480df148c3b988a",
-    "url": "/basketball-shots/static/js/main.00795ef5.chunk.js"
+    "revision": "8c75475d73c992d144ad",
+    "url": "/basketball-shots/static/js/main.f87c9209.chunk.js"
   },
   {
     "revision": "4948e0cd6cbe372e4034",
