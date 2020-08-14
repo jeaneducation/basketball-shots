@@ -3,7 +3,7 @@ import {Grid, Input} from "semantic-ui-react";
 import {Quarter, Team} from "./App";
 import QuarterView from "./QuarterView";
 import TotalView from "./TotalView";
-import {InputOnChangeData} from "semantic-ui-react/dist/commonjs/elements/Input/Input";
+import {InputOnChangeData} from "semantic-ui-react";
 
 interface Props {
     index: number
