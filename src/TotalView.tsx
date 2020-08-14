@@ -1,6 +1,5 @@
 import React from 'react';
-import {Button, Card, Grid, Icon, Input, Table} from "semantic-ui-react";
-import {Quarter} from "./App";
+import {Card, Grid, Input} from "semantic-ui-react";
 
 interface Props {
     shots: number
@@ -12,7 +11,8 @@ export class TotalView extends React.Component<Props> {
         const shots = this.props.shots;
         const contests = this.props.contests;
         // please don't divide by 0
-        return (shots - (contests / (shots > 0 ? shots : 1) * 100));
+        // return (shots - (contests / (shots > 0 ? shots : 1)) * 100);
+        return (shots - contests) / (shots > 0 ? shots : 1) * 100;
     }
 
     render() {
@@ -25,13 +25,13 @@ export class TotalView extends React.Component<Props> {
                     <Card.Description>
                         <Grid>
                             <Grid.Row style={{display: "inline"}}>
-                                <Input label="Shots" value={this.props.shots} readonly/>
+                                <Input label="Shots" value={this.props.shots} readOnly/>
                             </Grid.Row>
                             <Grid.Row style={{display: "inline"}}>
-                                <Input label="Contests" value={this.props.contests} readonly/>
+                                <Input label="Contests" value={this.props.contests} readOnly/>
                             </Grid.Row>
                             <Grid.Row style={{display: "inline"}}>
-                                <Input label="Running Total" value={this.calcRunningTotal()} readonly/>
+                                <Input label="Running Total" value={this.calcRunningTotal()} readOnly/>
                             </Grid.Row>
                         </Grid>
                     </Card.Description>

@@ -83,61 +83,43 @@ export class App extends React.Component<Props, State> {
         this.setState({
             games: newGames,
             current_game_index: 0,
-        });
+        }, () => this.saveData());
     }
 
     constructor(props: Props) {
         super(props)
         this.state = {
-            games: [
-                {
-                    create_datetime: new Date(),
-                    teams: [
-                        {
-                            name: "Janguars",
-                            quarters: [
-                                {
-                                    shots: 0,
-                                    contests: 0,
-                                },
-                                {
-                                    shots: 0,
-                                    contests: 0,
-                                },
-                                {
-                                    shots: 0,
-                                    contests: 0,
-                                },
-                                {
-                                    shots: 0,
-                                    contests: 0,
-                                },
-                            ]
-                        },
-                        {
-                            name: "Hellcats",
-                            quarters: [
-                                {
-                                    shots: 0,
-                                    contests: 0,
-                                },
-                                {
-                                    shots: 0,
-                                    contests: 0,
-                                },
-                                {
-                                    shots: 0,
-                                    contests: 0,
-                                },
-                                {
-                                    shots: 0,
-                                    contests: 0,
-                                },
-                            ]
-                        },
-                    ]
-                },
-            ]
+            games: [],
+            current_game_index: undefined,
+        };
+    }
+
+    componentDidMount() {
+        const storedGamesString = localStorage.getItem('games');
+        console.log("LOAD SAVED DATA", storedGamesString)
+        if (storedGamesString) {
+            const storedGames: Game[] = JSON.parse(storedGamesString);
+            // set Date objects, which are serialised as strings
+            storedGames.forEach((game, index) => {
+                game.create_datetime = new Date(game.create_datetime);
+            })
+            console.log("STORED GAMES JSON", storedGames);
+            // assume parsed json is the right type
+            this.setState({games: storedGames});
+        }
+    }
+
+    saveData = () => {
+        const storedGamesString = JSON.stringify(this.state.games);
+        localStorage.setItem('games', storedGamesString);
+    }
+
+    setGame = (data: Partial<Game>) => {
+        const index = this.state.current_game_index;
+        if (index !== undefined) {
+            const games = this.state.games;
+            games[index] = {...this.state.games[index], ...data};
+            this.setState({games}, () => this.saveData())
         }
     }
 
@@ -147,7 +129,7 @@ export class App extends React.Component<Props, State> {
         }
 
         const getMatchText = (game: Game): string => {
-            return `${!!game.teams[0].name ? game.teams[0].name : "[empty]"} v ${!!game.teams[1].name ? game.teams[1].name : "[empty]"} - ${getDate(game.create_datetime)}`;
+            return `${!!game.teams[0].name ? game.teams[0].name : "[team name]"} v ${!!game.teams[1].name ? game.teams[1].name : "[team name]"} - ${getDate(game.create_datetime)}`;
         }
 
         const dropdownOptions: DropdownItemProps[] =
@@ -166,13 +148,13 @@ export class App extends React.Component<Props, State> {
 
         return (
             <React.Fragment>
-                <Grid>
+                <Grid style={{width: "100%"}}>
                     <Grid.Row>
                         <div style={{display: "inline-flex"}}>
                             <Dropdown
                                 placeholder="Select game..."
-                                fluid
                                 selection
+                                fluid
                                 options={dropdownOptions}
                                 onChange={handleDropdownChange}
                                 value={this.state.current_game_index}
@@ -185,7 +167,7 @@ export class App extends React.Component<Props, State> {
                     </Grid.Row>
                     {this.state.current_game_index !== undefined &&
                     <Grid.Row>
-                        <GameView game={this.state.games[this.state.current_game_index]}/>
+                        <GameView game={this.state.games[this.state.current_game_index]} setGame={this.setGame}/>
                     </Grid.Row>
                     }
                 </Grid>

@@ -1,18 +1,27 @@
 import React from 'react';
-import {Card, Grid, Input} from "semantic-ui-react";
-import {Team} from "./App";
+import {Grid, Input} from "semantic-ui-react";
+import {Quarter, Team} from "./App";
 import QuarterView from "./QuarterView";
 import TotalView from "./TotalView";
+import {InputOnChangeData} from "semantic-ui-react/dist/commonjs/elements/Input/Input";
 
 interface Props {
+    index: number
     team: Team
+    setTeam: (data: Partial<Team>, index: number) => void
 }
 
-interface State {
+export class TeamView extends React.Component<Props> {
+    onTeamNameChange = (e: React.ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
+        this.props.setTeam({name: data.value !== "" ? data.value : undefined}, this.props.index);
+    }
 
-}
+    setQuarter = (data: Partial<Quarter>, index: number) => {
+        const quarters = this.props.team.quarters;
+        quarters[index] = {...this.props.team.quarters[index], ...data};
+        this.props.setTeam({quarters}, this.props.index);
+    }
 
-export class TeamView extends React.Component<Props, State> {
     calcTotalShots = (): number => {
         let total = 0;
         this.props.team.quarters.forEach((quarter) => {
@@ -33,11 +42,13 @@ export class TeamView extends React.Component<Props, State> {
         return (
             <Grid style={{width: "100%"}}>
                 <Grid.Row>
-                    <Input label="Team" placeholder="team name" value={this.props.team.name}/>
+                    <Input label="Team" placeholder="team name" value={this.props.team.name}
+                           onChange={this.onTeamNameChange}/>
                 </Grid.Row>
                 <Grid.Row>
                     {this.props.team.quarters.map((quarter, index) => <QuarterView quarter={quarter}
-                                                                                   quarter_number={index + 1}/>)}
+                                                                                   index={index}
+                                                                                   setQuarter={this.setQuarter}/>)}
                     <TotalView shots={this.calcTotalShots()} contests={this.calcTotalContests()}/>
                 </Grid.Row>
             </Grid>
