@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.particles {
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+
+    canvas {
+        background-image: linear-gradient(#5236ff, #0066ff);
+        position: absolute;
+        z-index: -1;
+        //user-select: none;
+    }
+}
+
+.backdrop {
+    opacity: 0.75;
+    margin: 0.5vw;
+    background: black;
+    height: 100%;
+    width: 99vw;
+    border-radius: 10px;
+}
+
+h1 {
+    color: #f7ffe6;
+    text-align: right;
+    display: block;
+    line-height: 1em;
+    font-size: 56px;
+    margin: 0;
+    padding-right: 2vw;
+    width: 100vw;
+}
+
+h2 {
+    color: #f7ffe6;
+    text-align: right;
+    display: block;
+    line-height: 1em;
+    font-size: 32px;
+    margin: 0;
+    padding-right: 2vw;
+    width: 100vw;
+}
+
+h3 {
+    color: #f7ffe6;
+    text-align: left;
+    display: block;
+    font-size: 24px;
+    margin: 0;
+    padding-left: 8px;
+}
+
+p {
+    color: lightgray;
+    text-align: left;
+    display: block;
+    font-size: 16px;
+    padding-left: 4vw;
+    padding-right: 1vw;
+    padding-top: 1vw;
+}
+
+li {
+    color: lightgray;
+    text-align: left;
+    display: block;
+    font-size: 16px;
+    padding-left: 4vw;
+    padding-right: 1vw;
+    padding-top: 1vw;
+}
+
+a {
+    display: block;
+    font-size: 16px;
+    padding-left: 4vw;
+    padding-right: 1vw;
+    padding-top: 1vw;
+}
+
+div {
+    width: fit-content;
+    padding-top: 16px;
+}
+
+@media screen and (min-width: 1000px) {
+    h1 {
+        font-size: 100px;
+    }
+
+    h2 {
+        font-size: 50px;
+    }
+
+    h3 {
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 2rem;
+        padding-left: 1vw;
+        padding-right: 0.25vw;
+        padding-top: 0.25vw;
+    }
+
+    li {
+        font-size: 2rem;
+        padding-left: 1vw;
+        padding-right: 0.25vw;
+        padding-top: 0.25vw;
+    }
+
+    a {
+        font-size: 2rem;
+        padding-left: 1vw;
+        padding-right: 0.25vw;
+        padding-top: 0.25vw;
+    }
+}
+
+//@media screen and (max-width: 600px) {
+//  .title {
+//        font-size: 26vw;
+//    }
+//    .subtitle {
+//        font-size: 8vw;
+//    }
+//    .heading {
+//        font-size: 6vw;
+//    }
+//}
