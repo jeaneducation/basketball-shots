@@ -148,7 +148,8 @@ export class App extends React.Component<Props, State> {
 
         return (
             <React.Fragment>
-                <Grid style={{width: "100%"}}>
+                {/*todo: remove hacked width*/}
+                <Grid style={{width: `${window.innerWidth}px`}}>
                     <Grid.Row>
                         <div style={{display: "inline-flex"}}>
                             <Dropdown

@@ -39,7 +39,7 @@ export class TeamView extends React.Component<Props> {
 
     render() {
         return (
-            <Grid style={{width: "100%"}}>
+            <Grid style={{width: `${window.innerWidth/2}px`}}>
                 <Grid.Row>
                     <Input label="Team" placeholder="team name" value={this.props.team.name}
                            onChange={this.onTeamNameChange}/>

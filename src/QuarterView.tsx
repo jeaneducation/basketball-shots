@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Card, Grid, Input} from "semantic-ui-react";
+import {Button, Card, Grid, Header, Icon, Input, Label} from "semantic-ui-react";
 import {Quarter} from "./App";
 
 interface Props {
@@ -48,22 +48,40 @@ export class QuarterView extends React.Component<Props> {
                     <Card.Header>
                         Quarter {this.props.index + 1}
                     </Card.Header>
-                    <Card.Description>
-                        <Grid>
-                            <Grid.Row style={{display: "inline", whiteSpace: "nowrap"}}>
-                                <Input label="Shots" value={this.props.quarter.shots} readOnly/>
-                                <Button icon="chevron down" color="yellow" onClick={() => this.adjustShots(-1)} disabled={this.props.quarter.shots <= 0}/>
-                                <Button icon="chevron up" color="green" onClick={() => this.adjustShots(1)}/>
-                            </Grid.Row>
-                            <Grid.Row style={{display: "inline", whiteSpace: "nowrap"}}>
-                                <Input label="Contests" value={this.props.quarter.contests} readOnly/>
-                                <Button icon="chevron down" color="yellow" onClick={() => this.adjustContests(-1)} disabled={this.props.quarter.contests <= 0}/>
-                                <Button icon="chevron up" color="green" onClick={() => this.adjustContests(1)}/>
-                            </Grid.Row>
-                            <Grid.Row style={{display: "inline"}}>
-                                <Input label="Running Total" value={this.calcRunningTotal()} readOnly/>
-                            </Grid.Row>
-                        </Grid>
+                    <Card.Description style={{display: "grid"}}>
+                        <div style={{display: "inline-flex"}}>
+                            <div>
+                                <Label size="big" for="shots">
+                                    Shots
+                                </Label>
+                                <Input id="shots" value={this.props.quarter.shots} readOnly type="number" style={{width: "4rem"}}/>
+                            </div>
+                            <div>
+                                <Button.Group>
+                                    <Button icon="chevron down" color="yellow" onClick={() => this.adjustShots(-1)}
+                                            disabled={this.props.quarter.shots <= 0}/>
+                                    <Button icon="chevron up" color="green" onClick={() => this.adjustShots(1)}/>
+                                </Button.Group>
+                            </div>
+                        </div>
+                        <div style={{display: "inline-flex"}}>
+                            <div>
+                                <Label size="big" for="contests">
+                                    Contests
+                                </Label>
+                                <Input id="contests" value={this.props.quarter.contests} readOnly type="number" style={{width: "4rem"}}/>
+                            </div>
+                            <div>
+                                <Button.Group>
+                                    <Button icon="chevron down" color="yellow" onClick={() => this.adjustContests(-1)}
+                                            disabled={this.props.quarter.contests <= 0}/>
+                                    <Button icon="chevron up" color="green" onClick={() => this.adjustContests(1)}/>
+                                </Button.Group>
+                            </div>
+                        </div>
+                        <div style={{display: "inline-flex"}}>
+                            <Input label="Running Total" value={this.calcRunningTotal()} readOnly style={{width: "5rem"}}/>
+                        </div>
                     </Card.Description>
                 </Card.Content>
             </Card>

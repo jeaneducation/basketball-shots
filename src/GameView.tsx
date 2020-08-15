@@ -32,11 +32,13 @@ export class GameView extends React.Component<Props> {
                 {/*<Header as="h1">{getMatchText()}</Header>*/}
                 {/*<Header as="h2">{getDate()}</Header>*/}
 
-                <Grid style={{width: "100%"}}>
-                    <Grid.Column width={8}>
+                {/*todo: remove hacked widths*/}
+                <Grid style={{width: `${window.innerWidth}px`}}>
+                    {/*<Grid.Column style={{width: `30vw`}}>*/}
+                        <Grid.Column width={6}>
                         <TeamView team={this.props.game.teams[0]} index={0} setTeam={this.setTeam}/>
                     </Grid.Column>
-                    <Grid.Column width={8}>
+                    <Grid.Column width={10}>
                         <TeamView team={this.props.game.teams[1]} index={1} setTeam={this.setTeam}/>
                     </Grid.Column>
                 </Grid>

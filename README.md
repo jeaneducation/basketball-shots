@@ -18,3 +18,8 @@ Count basketball shots
 1. change "homepage" in `package.json` to the URL of your GitHub pages site
 1. `npm install`
 1. `npm run deploy`
+
+# Todo
+- Fix styling withs. Widths are not behaving, currently styling is messy to make it work on iPads.
+- Spice up the styling
+ 
