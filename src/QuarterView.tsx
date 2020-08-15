@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Card, Grid, Header, Icon, Input, Label} from "semantic-ui-react";
+import {Button, Card, Input, Label} from "semantic-ui-react";
 import {Quarter} from "./App";
 
 interface Props {
@@ -51,7 +51,7 @@ export class QuarterView extends React.Component<Props> {
                     <Card.Description style={{display: "grid"}}>
                         <div style={{display: "inline-flex"}}>
                             <div>
-                                <Label size="big" for="shots">
+                                <Label size="big" htmlFor="shots">
                                     Shots
                                 </Label>
                                 <Input id="shots" value={this.props.quarter.shots} readOnly type="number" style={{width: "4rem"}}/>
@@ -66,7 +66,7 @@ export class QuarterView extends React.Component<Props> {
                         </div>
                         <div style={{display: "inline-flex"}}>
                             <div>
-                                <Label size="big" for="contests">
+                                <Label size="big" htmlFor="contests">
                                     Contests
                                 </Label>
                                 <Input id="contests" value={this.props.quarter.contests} readOnly type="number" style={{width: "4rem"}}/>

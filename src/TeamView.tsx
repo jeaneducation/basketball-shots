@@ -47,7 +47,7 @@ export class TeamView extends React.Component<Props> {
                 <Grid.Row>
                     {this.props.team.quarters.map((quarter, index) => <QuarterView quarter={quarter}
                                                                                    index={index}
-                                                                                   setQuarter={this.setQuarter}/>)}
+                                                                                   setQuarter={this.setQuarter} key={index}/>)}
                     <TotalView shots={this.calcTotalShots()} contests={this.calcTotalContests()}/>
                 </Grid.Row>
             </Grid>
