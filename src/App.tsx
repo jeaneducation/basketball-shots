@@ -30,6 +30,29 @@ export interface Quarter {
 
 export class App extends React.Component<Props, State> {
 
+    constructor(props: Props) {
+        super(props)
+        this.state = {
+            games: [],
+            current_game_index: undefined,
+        };
+    }
+
+    componentDidMount() {
+        const storedGamesString = localStorage.getItem('games');
+        console.log("LOAD SAVED DATA", storedGamesString)
+        if (storedGamesString) {
+            const storedGames: Game[] = JSON.parse(storedGamesString);
+            // set Date objects, which are serialised as strings
+            storedGames.forEach((game, index) => {
+                game.create_datetime = new Date(game.create_datetime);
+            })
+            console.log("STORED GAMES JSON", storedGames);
+            // assume parsed json is the right type
+            this.setState({games: storedGames});
+        }
+    }
+
     createNewGame = () => {
         const newGames = this.state.games;
         newGames.unshift({
@@ -86,32 +109,23 @@ export class App extends React.Component<Props, State> {
         }, () => this.saveData());
     }
 
-    constructor(props: Props) {
-        super(props)
-        this.state = {
-            games: [],
-            current_game_index: undefined,
-        };
-    }
-
-    componentDidMount() {
-        const storedGamesString = localStorage.getItem('games');
-        console.log("LOAD SAVED DATA", storedGamesString)
-        if (storedGamesString) {
-            const storedGames: Game[] = JSON.parse(storedGamesString);
-            // set Date objects, which are serialised as strings
-            storedGames.forEach((game, index) => {
-                game.create_datetime = new Date(game.create_datetime);
-            })
-            console.log("STORED GAMES JSON", storedGames);
-            // assume parsed json is the right type
-            this.setState({games: storedGames});
-        }
-    }
-
     saveData = () => {
         const storedGamesString = JSON.stringify(this.state.games);
         localStorage.setItem('games', storedGamesString);
+    }
+
+    deleteCurrentGame = () => {
+        if (this.state.current_game_index !== undefined) {
+            if (window.confirm("Are you sure you wan to delete the current game?")) {
+                const games = this.state.games;
+                games.splice(this.state.current_game_index, 1);
+                console.log('games delete', games)
+                this.setState({
+                    games,
+                    current_game_index: undefined,
+                }, () => this.saveData());
+            }
+        }
     }
 
     setGame = (data: Partial<Game>) => {
@@ -158,12 +172,15 @@ export class App extends React.Component<Props, State> {
                                 fluid
                                 options={dropdownOptions}
                                 onChange={handleDropdownChange}
-                                value={this.state.current_game_index}
+                                value={this.state.current_game_index !== undefined ? this.state.current_game_index : ""}
                                 disabled={this.state.games.length < 1}
                             />
                             <Button icon labelPosition="left" onClick={this.createNewGame} primary={true}>
                                 <Icon name="plus"/>
                                 New Game
+                            </Button>
+                            <Button icon onClick={this.deleteCurrentGame} disabled={this.state.current_game_index === undefined}>
+                                <Icon name="trash"/>
                             </Button>
                         </div>
                     </Grid.Row>
