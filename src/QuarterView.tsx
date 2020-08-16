@@ -6,16 +6,10 @@ interface Props {
     index: number
     quarter: Quarter
     setQuarter: (data: Partial<Quarter>, quarterIndex: number) => void
+    calcRunningTotal: (shots: number, contests: number) => number
 }
 
 export class QuarterView extends React.Component<Props> {
-    calcRunningTotal = (): number => {
-        const shots = this.props.quarter.shots;
-        const contests = this.props.quarter.contests;
-        // please don't divide by 0
-        // return (shots - (contests / (shots > 0 ? shots : 1)) * 100);
-        return (shots - contests) / (shots > 0 ? shots : 1) * 100;
-    }
 
     adjustShots = (value: number) => {
         const newShots = this.props.quarter.shots + value;
@@ -75,12 +69,12 @@ export class QuarterView extends React.Component<Props> {
                                 <Button.Group>
                                     <Button icon="chevron down" color="yellow" onClick={() => this.adjustContests(-1)}
                                             disabled={this.props.quarter.contests <= 0}/>
-                                    <Button icon="chevron up" color="green" onClick={() => this.adjustContests(1)}/>
+                                    <Button icon="chevron up" color="green" onClick={() => this.adjustContests(1)} disabled={this.props.quarter.shots >= this.props.quarter.contests}/>
                                 </Button.Group>
                             </div>
                         </div>
                         <div style={{display: "inline-flex"}}>
-                            <Input label="Running Total" value={this.calcRunningTotal()} readOnly style={{width: "5rem"}}/>
+                            <Input label="Running Total" value={this.props.calcRunningTotal(this.props.quarter.shots, this.props.quarter.shots)} readOnly style={{width: "5rem"}}/>
                         </div>
                     </Card.Description>
                 </Card.Content>

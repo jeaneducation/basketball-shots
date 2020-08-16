@@ -37,9 +37,13 @@ export class TeamView extends React.Component<Props> {
         return total;
     }
 
+    calcRunningTotal = (shots: number, contests: number) => {
+        return (shots - contests) / (shots > 0 ? shots : 1) * 100;
+    }
+
     render() {
         return (
-            <Grid style={{width: `${window.innerWidth/2}px`}}>
+            <Grid style={{width: `${window.innerWidth / 2}px`}}>
                 <Grid.Row>
                     <Input label="Team" placeholder="team name" value={this.props.team.name}
                            onChange={this.onTeamNameChange}/>
@@ -47,8 +51,11 @@ export class TeamView extends React.Component<Props> {
                 <Grid.Row>
                     {this.props.team.quarters.map((quarter, index) => <QuarterView quarter={quarter}
                                                                                    index={index}
-                                                                                   setQuarter={this.setQuarter} key={index}/>)}
-                    <TotalView shots={this.calcTotalShots()} contests={this.calcTotalContests()}/>
+                                                                                   setQuarter={this.setQuarter}
+                                                                                   key={index}
+                                                                                   calcRunningTotal={this.calcRunningTotal}/>)}
+                    <TotalView shots={this.calcTotalShots()} contests={this.calcTotalContests()}
+                               calcRunningTotal={this.calcRunningTotal}/>
                 </Grid.Row>
             </Grid>
         );

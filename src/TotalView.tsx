@@ -4,16 +4,10 @@ import {Card, Grid, Input} from "semantic-ui-react";
 interface Props {
     shots: number
     contests: number
+    calcRunningTotal: (shots: number, contests: number) => number
 }
 
 export class TotalView extends React.Component<Props> {
-    calcRunningTotal = (): number => {
-        const shots = this.props.shots;
-        const contests = this.props.contests;
-        // please don't divide by 0
-        // return (shots - (contests / (shots > 0 ? shots : 1)) * 100);
-        return (shots - contests) / (shots > 0 ? shots : 1) * 100;
-    }
 
     render() {
         return (
@@ -31,7 +25,7 @@ export class TotalView extends React.Component<Props> {
                                 <Input label="Contests" value={this.props.contests} readOnly/>
                             </Grid.Row>
                             <Grid.Row style={{display: "inline"}}>
-                                <Input label="Running Total" value={this.calcRunningTotal()} readOnly/>
+                                <Input label="Running Total" value={this.props.calcRunningTotal(this.props.shots, this.props.shots)} readOnly/>
                             </Grid.Row>
                         </Grid>
                     </Card.Description>
