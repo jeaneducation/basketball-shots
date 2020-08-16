@@ -25,7 +25,7 @@ export class TotalView extends React.Component<Props> {
                                 <Input label="Contests" value={this.props.contests} readOnly/>
                             </Grid.Row>
                             <Grid.Row style={{display: "inline"}}>
-                                <Input label="Running Total" value={this.props.calcRunningTotal(this.props.shots, this.props.shots)} readOnly/>
+                                <Input label="Running Total" value={this.props.calcRunningTotal(this.props.shots, this.props.contests)} readOnly/>
                             </Grid.Row>
                         </Grid>
                     </Card.Description>
