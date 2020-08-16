@@ -69,7 +69,7 @@ export class QuarterView extends React.Component<Props> {
                                 <Button.Group>
                                     <Button icon="chevron down" color="yellow" onClick={() => this.adjustContests(-1)}
                                             disabled={this.props.quarter.contests <= 0}/>
-                                    <Button icon="chevron up" color="green" onClick={() => this.adjustContests(1)} disabled={this.props.quarter.shots >= this.props.quarter.contests}/>
+                                    <Button icon="chevron up" color="green" onClick={() => this.adjustContests(1)} disabled={this.props.quarter.shots <= this.props.quarter.contests}/>
                                 </Button.Group>
                             </div>
                         </div>
