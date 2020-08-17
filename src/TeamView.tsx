@@ -8,6 +8,7 @@ interface Props {
     index: number
     team: Team
     setTeam: (data: Partial<Team>, index: number) => void
+    quadrantView?: boolean
 }
 
 export class TeamView extends React.Component<Props> {
@@ -42,8 +43,40 @@ export class TeamView extends React.Component<Props> {
     }
 
     render() {
+        if (this.props.quadrantView) {
+            return <Grid style={{width: "100%"}}>
+                <Grid.Row>
+                    <Input label="Team" placeholder="team name" value={this.props.team.name}
+                           onChange={this.onTeamNameChange}/>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid style={{width: "100%"}}>
+                        <Grid.Row>
+                            <Grid.Column width={8}>
+                                <QuarterView index={0} quarter={this.props.team.quarters[0]} setQuarter={this.setQuarter} calcRunningTotal={this.calcRunningTotal}/>
+                            </Grid.Column>
+                            <Grid.Column width={8}>
+                                <QuarterView index={1} quarter={this.props.team.quarters[1]} setQuarter={this.setQuarter} calcRunningTotal={this.calcRunningTotal}/>
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row>
+                            <Grid.Column width={8}>
+                                <QuarterView index={2} quarter={this.props.team.quarters[2]} setQuarter={this.setQuarter} calcRunningTotal={this.calcRunningTotal}/>
+                            </Grid.Column>
+                            <Grid.Column width={8}>
+                                <QuarterView index={3} quarter={this.props.team.quarters[3]} setQuarter={this.setQuarter} calcRunningTotal={this.calcRunningTotal}/>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Grid.Row>
+                <Grid.Row>
+                    <TotalView shots={this.calcTotalShots()} contests={this.calcTotalContests()}
+                               calcRunningTotal={this.calcRunningTotal}/>
+                </Grid.Row>
+            </Grid>
+        }
         return (
-            <Grid style={{width: `${window.innerWidth / 2}px`}}>
+            <Grid style={{width: "100%"}}>
                 <Grid.Row>
                     <Input label="Team" placeholder="team name" value={this.props.team.name}
                            onChange={this.onTeamNameChange}/>

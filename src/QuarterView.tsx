@@ -48,7 +48,7 @@ export class QuarterView extends React.Component<Props> {
                                 <Label size="big" htmlFor="shots">
                                     Shots
                                 </Label>
-                                <Input id="shots" value={this.props.quarter.shots} readOnly type="number" style={{width: "4rem"}}/>
+                                <Input id="shots" value={this.props.quarter.shots} readOnly type="number" style={{width: "5rem"}}/>
                             </div>
                             <div>
                                 <Button.Group>
@@ -63,7 +63,7 @@ export class QuarterView extends React.Component<Props> {
                                 <Label size="big" htmlFor="contests">
                                     Contests
                                 </Label>
-                                <Input id="contests" value={this.props.quarter.contests} readOnly type="number" style={{width: "4rem"}}/>
+                                <Input id="contests" value={this.props.quarter.contests} readOnly type="number" style={{width: "5rem"}}/>
                             </div>
                             <div>
                                 <Button.Group>
@@ -74,7 +74,7 @@ export class QuarterView extends React.Component<Props> {
                             </div>
                         </div>
                         <div style={{display: "inline-flex"}}>
-                            <Input label="Running Total" value={this.props.calcRunningTotal(this.props.quarter.shots, this.props.quarter.shots)} readOnly style={{width: "5rem"}}/>
+                            <Input label="Running Total %" value={this.props.calcRunningTotal(this.props.quarter.shots, this.props.quarter.contests)} readOnly style={{width: "5rem"}}/>
                         </div>
                     </Card.Description>
                 </Card.Content>

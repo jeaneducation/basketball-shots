@@ -6,6 +6,7 @@ import TeamView from "./TeamView";
 interface Props {
     game: Game
     setGame: (data: Partial<Game>) => void
+    singleTeamOnly: boolean
 }
 
 export class GameView extends React.Component<Props> {
@@ -27,18 +28,21 @@ export class GameView extends React.Component<Props> {
         //     return `${!!game.teams[0].name ? game.teams[0].name : "[team name]"} v ${!!game.teams[1].name ? game.teams[1].name : "[team name]"}`;
         // }
 
+        if (this.props.singleTeamOnly) {
+            return <TeamView team={this.props.game.teams[0]} index={0} setTeam={this.setTeam} quadrantView={this.props.singleTeamOnly && window.innerWidth > 500}/>
+        }
         return (
             <React.Fragment>
                 {/*<Header as="h1">{getMatchText()}</Header>*/}
                 {/*<Header as="h2">{getDate()}</Header>*/}
 
                 {/*todo: remove hacked widths*/}
-                <Grid style={{width: `${window.innerWidth}px`}}>
+                <Grid style={{width: "100%"}}>
                     {/*<Grid.Column style={{width: `30vw`}}>*/}
-                        <Grid.Column width={6}>
+                        <Grid.Column width={8}>
                         <TeamView team={this.props.game.teams[0]} index={0} setTeam={this.setTeam}/>
                     </Grid.Column>
-                    <Grid.Column width={10}>
+                    <Grid.Column width={8}>
                         <TeamView team={this.props.game.teams[1]} index={1} setTeam={this.setTeam}/>
                     </Grid.Column>
                 </Grid>
