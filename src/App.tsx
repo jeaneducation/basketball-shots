@@ -198,13 +198,13 @@ export class App extends React.Component<Props, State> {
                                 <Icon name="plus"/>
                                 New Game
                             </Button>
-                            <Button icon onClick={this.deleteCurrentGame} disabled={this.state.current_game_index === undefined}>
-                                <Icon name="trash"/>
-                            </Button>
                             <div>
                                 <Button onClick={() => setSingleTeamOnly(true)} primary={this.state.current_game_index !== undefined && this.state.games[this.state.current_game_index].single_team_only} disabled={this.state.current_game_index === undefined}>Single</Button>
                                 <Button onClick={() => setSingleTeamOnly(false)} primary={this.state.current_game_index !== undefined && !this.state.games[this.state.current_game_index].single_team_only} disabled={this.state.current_game_index === undefined}>Double</Button>
                             </div>
+                            <Button icon onClick={this.deleteCurrentGame} disabled={this.state.current_game_index === undefined}>
+                                <Icon name="trash"/>
+                            </Button>
                         </div>
                     </Grid.Row>
                     {this.state.current_game_index !== undefined &&
