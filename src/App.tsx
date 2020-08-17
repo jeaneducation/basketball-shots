@@ -16,6 +16,7 @@ interface Props {
 export interface Game {
     teams: [Team, Team]
     create_datetime: Date
+    single_team_only: boolean
 }
 
 export interface Team {
@@ -40,16 +41,20 @@ export class App extends React.Component<Props, State> {
 
     componentDidMount() {
         const storedGamesString = localStorage.getItem('games');
-        console.log("LOAD SAVED DATA", storedGamesString)
-        if (storedGamesString) {
-            const storedGames: Game[] = JSON.parse(storedGamesString);
-            // set Date objects, which are serialised as strings
-            storedGames.forEach((game, index) => {
-                game.create_datetime = new Date(game.create_datetime);
-            })
-            console.log("STORED GAMES JSON", storedGames);
-            // assume parsed json is the right type
-            this.setState({games: storedGames});
+        try {
+            console.log("LOAD SAVED DATA", storedGamesString);
+            if (storedGamesString) {
+                const storedGames: Game[] = JSON.parse(storedGamesString);
+                // set Date objects, which are serialised as strings
+                storedGames.forEach((game, index) => {
+                    game.create_datetime = new Date(game.create_datetime);
+                })
+                console.log("STORED GAMES JSON", storedGames);
+                // assume parsed json is the right type
+                this.setState({games: storedGames});
+            }
+        } catch (e) {
+            localStorage.setItem('games', '');
         }
     }
 
@@ -100,7 +105,8 @@ export class App extends React.Component<Props, State> {
                         },
                     ]
                 },
-            ]
+            ],
+            single_team_only: true,
         });
 
         this.setState({
@@ -119,7 +125,7 @@ export class App extends React.Component<Props, State> {
             if (window.confirm("Are you sure you wan to delete the current game?")) {
                 const games = this.state.games;
                 games.splice(this.state.current_game_index, 1);
-                console.log('games delete', games)
+                console.log('games delete', games);
                 this.setState({
                     games,
                     current_game_index: undefined,
@@ -133,7 +139,7 @@ export class App extends React.Component<Props, State> {
         if (index !== undefined) {
             const games = this.state.games;
             games[index] = {...this.state.games[index], ...data};
-            this.setState({games}, () => this.saveData())
+            this.setState({games}, () => this.saveData());
         }
     }
 
@@ -143,6 +149,9 @@ export class App extends React.Component<Props, State> {
         }
 
         const getMatchText = (game: Game): string => {
+            if (game.single_team_only) {
+                return `${!!game.teams[0].name ? game.teams[0].name : "[team name]"} - ${getDate(game.create_datetime)}`;
+            }
             return `${!!game.teams[0].name ? game.teams[0].name : "[team name]"} v ${!!game.teams[1].name ? game.teams[1].name : "[team name]"} - ${getDate(game.create_datetime)}`;
         }
 
@@ -160,10 +169,20 @@ export class App extends React.Component<Props, State> {
             this.setState({current_game_index: data.value !== "" ? Number(data.value) : undefined})
         }
 
+        const setSingleTeamOnly = (singleTeamOnly: boolean) => {
+            if (this.state.current_game_index !== undefined) {
+                const games = this.state.games;
+                if (games[this.state.current_game_index].single_team_only !== singleTeamOnly) {
+                    games[this.state.current_game_index].single_team_only = singleTeamOnly;
+                    this.setState({games}, () => this.saveData());
+                }
+            }
+        }
+
         return (
             <React.Fragment>
                 {/*todo: remove hacked width*/}
-                <Grid style={{width: `${window.innerWidth}px`}}>
+                <Grid style={{width: "100%"}}>
                     <Grid.Row>
                         <div style={{display: "inline-flex"}}>
                             <Dropdown
@@ -179,6 +198,10 @@ export class App extends React.Component<Props, State> {
                                 <Icon name="plus"/>
                                 New Game
                             </Button>
+                            <div>
+                                <Button onClick={() => setSingleTeamOnly(true)} primary={this.state.current_game_index !== undefined && this.state.games[this.state.current_game_index].single_team_only} disabled={this.state.current_game_index === undefined}>Single</Button>
+                                <Button onClick={() => setSingleTeamOnly(false)} primary={this.state.current_game_index !== undefined && !this.state.games[this.state.current_game_index].single_team_only} disabled={this.state.current_game_index === undefined}>Double</Button>
+                            </div>
                             <Button icon onClick={this.deleteCurrentGame} disabled={this.state.current_game_index === undefined}>
                                 <Icon name="trash"/>
                             </Button>
@@ -186,7 +209,7 @@ export class App extends React.Component<Props, State> {
                     </Grid.Row>
                     {this.state.current_game_index !== undefined &&
                     <Grid.Row>
-                        <GameView game={this.state.games[this.state.current_game_index]} setGame={this.setGame}/>
+                        <GameView game={this.state.games[this.state.current_game_index]} setGame={this.setGame} singleTeamOnly={this.state.games[this.state.current_game_index].single_team_only}/>
                     </Grid.Row>
                     }
                 </Grid>
