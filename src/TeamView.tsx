@@ -39,7 +39,8 @@ export class TeamView extends React.Component<Props> {
     }
 
     calcRunningTotal = (shots: number, contests: number) => {
-        return (shots - contests) / (shots > 0 ? shots : 1) * 100;
+        //return (shots - contests) / (shots > 0 ? shots : 1) * 100;
+        return (contests / shots ) * 100;
     }
 
     render() {
