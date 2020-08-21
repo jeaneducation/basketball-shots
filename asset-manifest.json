@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/basketball-shots/static/css/main.e070fe03.chunk.css",
-    "main.js": "/basketball-shots/static/js/main.72c49f2d.chunk.js",
-    "main.js.map": "/basketball-shots/static/js/main.72c49f2d.chunk.js.map",
+    "main.js": "/basketball-shots/static/js/main.b131e204.chunk.js",
+    "main.js.map": "/basketball-shots/static/js/main.b131e204.chunk.js.map",
     "runtime-main.js": "/basketball-shots/static/js/runtime-main.a4cea19c.js",
     "runtime-main.js.map": "/basketball-shots/static/js/runtime-main.a4cea19c.js.map",
     "static/css/2.c43ad6bd.chunk.css": "/basketball-shots/static/css/2.c43ad6bd.chunk.css",
     "static/js/2.80587d74.chunk.js": "/basketball-shots/static/js/2.80587d74.chunk.js",
     "static/js/2.80587d74.chunk.js.map": "/basketball-shots/static/js/2.80587d74.chunk.js.map",
     "index.html": "/basketball-shots/index.html",
-    "precache-manifest.c10c00dd36d41d2c96e2c6d5c65603d8.js": "/basketball-shots/precache-manifest.c10c00dd36d41d2c96e2c6d5c65603d8.js",
+    "precache-manifest.c2c439abc4a1583db36e6e023aa0cb3f.js": "/basketball-shots/precache-manifest.c2c439abc4a1583db36e6e023aa0cb3f.js",
     "service-worker.js": "/basketball-shots/service-worker.js",
     "static/css/2.c43ad6bd.chunk.css.map": "/basketball-shots/static/css/2.c43ad6bd.chunk.css.map",
     "static/css/main.e070fe03.chunk.css.map": "/basketball-shots/static/css/main.e070fe03.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.c43ad6bd.chunk.css",
     "static/js/2.80587d74.chunk.js",
     "static/css/main.e070fe03.chunk.css",
-    "static/js/main.72c49f2d.chunk.js"
+    "static/js/main.b131e204.chunk.js"
   ]
 }
